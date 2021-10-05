@@ -132,11 +132,11 @@ impl mio::Evented for SocketListener {
                 let res = lst.deregister(poll);
 
                 // cleanup file path
-                if let Ok(addr) = lst.local_addr() {
-                    if let Some(path) = addr.as_pathname() {
-                        let _ = std::fs::remove_file(path);
-                    }
-                }
+                // if let Ok(addr) = lst.local_addr() {
+                //     if let Some(path) = addr.as_pathname() {
+                //         let _ = std::fs::remove_file(path);
+                //     }
+                // }
                 res
             }
         }
