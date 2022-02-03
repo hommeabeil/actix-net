@@ -805,7 +805,7 @@
             .<span class="ident">for_each</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">info</span>)<span class="op">|</span> <span class="self">self</span>.<span class="ident">deregister_logged</span>(<span class="ident">info</span>));
     }
 
-    <span class="kw">fn</span> <span class="ident">terminate_all</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sockets</span>: <span class="kw-2">&amp;mut</span>[<span class="ident">ServerSocketInfo</span>]) {
+    <span class="kw">fn</span> <span class="ident">terminate_all</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sockets</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">ServerSocketInfo</span>]) {
         <span class="ident">sockets</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">lst</span>.<span class="ident">terminate</span>());
     }
 

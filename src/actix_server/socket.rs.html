@@ -295,9 +295,6 @@
 <span id="288">288</span>
 <span id="289">289</span>
 <span id="290">290</span>
-<span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
 </pre><pre class="rust"><code><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">std::net</span>::{
     <span class="ident">SocketAddr</span> <span class="kw">as</span> <span class="ident">StdSocketAddr</span>, <span class="ident">TcpListener</span> <span class="kw">as</span> <span class="ident">StdTcpListener</span>, <span class="ident">ToSocketAddrs</span>,
 };
@@ -338,9 +335,7 @@
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">MioListener::Tcp</span>(<span class="kw-2">ref</span> <span class="ident">lst</span>) =&gt; <span class="ident">lst</span>.<span class="ident">accept</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">stream</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">MioStream::Tcp</span>(<span class="ident">stream</span>)),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
-            <span class="ident">MioListener::Uds</span>(<span class="kw-2">ref</span> <span class="ident">lst</span>) =&gt; {
-                <span class="ident">lst</span>.<span class="ident">accept</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">stream</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">MioStream::Uds</span>(<span class="ident">stream</span>))
-            }
+            <span class="ident">MioListener::Uds</span>(<span class="kw-2">ref</span> <span class="ident">lst</span>) =&gt; <span class="ident">lst</span>.<span class="ident">accept</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">stream</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">MioStream::Uds</span>(<span class="ident">stream</span>)),
         }
     }
 
@@ -349,16 +344,15 @@
             <span class="ident">MioListener::Tcp</span>(<span class="kw">_</span>) =&gt; (),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
             <span class="ident">MioListener::Uds</span>(<span class="kw-2">ref</span> <span class="ident">lst</span>) =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">addr</span>) <span class="op">=</span> <span class="ident">lst</span>.<span class="ident">local_addr</span>() {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">addr</span>.<span class="ident">as_pathname</span>() {
-                            <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">std::fs::remove_file</span>(<span class="ident">path</span>);
-                        }
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">addr</span>) <span class="op">=</span> <span class="ident">lst</span>.<span class="ident">local_addr</span>() {
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">addr</span>.<span class="ident">as_pathname</span>() {
+                        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">std::fs::remove_file</span>(<span class="ident">path</span>);
                     }
                 }
+            }
         }
     }
 }
-
 
 <span class="kw">impl</span> <span class="ident">Source</span> <span class="kw">for</span> <span class="ident">MioListener</span> {
     <span class="kw">fn</span> <span class="ident">register</span>(
@@ -391,7 +385,7 @@
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">MioListener::Tcp</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">lst</span>) =&gt; <span class="ident">lst</span>.<span class="ident">deregister</span>(<span class="ident">registry</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
-            <span class="ident">MioListener::Uds</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">lst</span>) =&gt; <span class="ident">lst</span>.<span class="ident">deregister</span>(<span class="ident">registry</span>)
+            <span class="ident">MioListener::Uds</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">lst</span>) =&gt; <span class="ident">lst</span>.<span class="ident">deregister</span>(<span class="ident">registry</span>),
         }
     }
 }
