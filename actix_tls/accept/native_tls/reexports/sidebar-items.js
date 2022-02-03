@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Error","An error returned from the TLS implementation."],["TlsAcceptor","A wrapper around a `native_tls::TlsAcceptor`, providing an async `accept` method."]]});

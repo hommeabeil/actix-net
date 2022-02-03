@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ServerConfig","Common configuration for a set of server sessions."]]});
